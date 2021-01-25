@@ -5,6 +5,10 @@ width: 20px;
 height: 20px;
 }
 
+.img {
+    display: none;
+}
+
 .line {
 display: flex;
 }

@@ -4,11 +4,12 @@ function loadBoard() {
     let i = 0
     for (boardLine of shuffleBoard) {
     html += `<div class="line line${i}">`;
+    let j = 0;
         for (boardElement of boardLine) {
-    html += `<div class="boardElement">`;
-    html += `<div class="back"></div>`;
-    html += `<div class="front"></div><img src='./imgs/${boardElement}.png' width="20" height="20">`;
+    html += `<div class="boardElement" id="${i}-${j}">`;
+    html += `<img class="img" src='./imgs/${boardElement}.png' width="20" height="20">`;
     html += `</div>`;
+    j+=1
       }
       html += `</div>`;
       i+=1
@@ -17,10 +18,7 @@ function loadBoard() {
     board = document.querySelector('#board');
     board.innerHTML = html;
     console.log(board);
-      const allElements = document.querySelectorAll(".boardElement")
-      for (boardElement of allElements) {
-        boardElement.addEventListener("click", revealValue())  
-      } 
+      
   }
   //<img src='./imgs/${boardElement}' width="15" height="15">
 
@@ -67,10 +65,25 @@ function shuffleBoard () {
     return board;
 }
 
-function revealValue() {
+function revealValue(event) {
+    //const target = event.currentTarget;
+    console.log('Holy Moly')
     
 }
 
+window.addEventListener('load', () => {
+
+const allElements = document.getElementsByClassName("boardElement")
+for (boardElement of allElements) {
+  boardElement.addEventListener("click", revealValue());
+}
+
+});
+
+
+
+
+  
 
 shuffleBoard()
 loadBoard ()
