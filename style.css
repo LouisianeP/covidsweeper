@@ -1,3 +1,10 @@
+
+body {
+    background-image: url(/imgs/Windows98.jpg) ;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
 .boardElement {
 border: 1px solid lightgrey;
 background-color: grey;
