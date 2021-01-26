@@ -1,6 +1,5 @@
-function loadBoard() {
+function loadBoard(shuffleBoard) {
     let html =''
-    shuffleBoard = shuffleBoard();
     let i = 0
     for (boardLine of shuffleBoard) {
     html += `<div class="line line${i}">`;
@@ -13,15 +12,10 @@ function loadBoard() {
       }
       html += `</div>`;
       i+=1
-    };
-   // console.log(html)
     board = document.querySelector('#board');
     board.innerHTML = html;
-    console.log(board);
-      
+    }  
   }
-  //<img src='./imgs/${boardElement}' width="15" height="15">
-
 
 
 function shuffleBoard () {
@@ -39,7 +33,7 @@ function shuffleBoard () {
 
     const board = Array(9).fill().map(() => Array(9).fill(0));
 
-    console.log(bombs)
+ //   console.log(bombs)
     for (bomb of bombs) {
         let x = bomb[0];
         let y = bomb[1];
@@ -61,29 +55,42 @@ function shuffleBoard () {
             board[x][y-1]+=1;
         }
     }
-    console.log(board)
+ //   console.log(board)
     return board;
 }
 
-function revealValue(event) {
+function revealValue(boardElement) {
     //const target = event.currentTarget;
-    console.log('Holy Moly')
+   console.log(boardElement.id)
+   let coordinates = boardElement.id.split('-')
+   let x = coordinates[0]
+   let y = coordinates[1]
+   console.log(theBoard[x][y])
+// case where the value = 0
+for (i=0;i<theBoard.length;i++)
+
+
+// case where the value = 1,2,3 ...
+    if (theBoard[x][y]!==0 && theBoard[x][y]!=='X')    boardElement.querySelector('img').classList.remove('img')
+
+// case where this is a bomb
+
+
+
+ //  console.log('Holy Molly')
     
 }
 
-window.addEventListener('load', () => {
-
-const allElements = document.getElementsByClassName("boardElement")
-for (boardElement of allElements) {
-  boardElement.addEventListener("click", revealValue());
-}
-
+window.addEventListener('load', function (event) {
+    const allElements = document.querySelectorAll(".boardElement")
+    for (let i=0; i< allElements.length; i++) {
+    allElements[i].addEventListener('click',function (event) {
+        revealValue(allElements[i])
+    });
+    }
 });
 
 
-
-
-  
-
-shuffleBoard()
-loadBoard ()
+const theBoard = shuffleBoard()
+console.log(theBoard)
+loadBoard (theBoard)
