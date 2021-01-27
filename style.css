@@ -1,9 +1,61 @@
-
+/* 
 body {
     background-image: url(/imgs/Windows98.jpg) ;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
+    min-width: 200px;
+    min-height: 200px;
+    background
+} */
+
+
+.game_container{
+    margin-top: 150px;
+    margin-left: 150px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
 }
+
+.top_bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: grey;
+    width: 198px;
+    height: 50px;
+}
+
+.mines_counter {
+    width: 63px;
+    height: 41px;
+    background-image: url(/imgs/nums_background.svg); 
+    display: flex;
+}
+
+.mines_counter > div > img{
+    width: 20px;
+    margin-right: 1px;
+    margin-top: 2px;
+}
+
+.time_counter {
+    width: 63px;
+    height: 41px;
+    background-image: url(/imgs/nums_background.svg); 
+    display: flex;
+}
+
+.time_counter > div > img{
+    width: 20px;
+    margin-right: 1px;
+    margin-top: 2px;
+}
+#face img {
+    width: 30px;
+}
+
 
 .boardElement {
 border: 1px solid lightgrey;
@@ -16,6 +68,16 @@ height: 20px;
     display: none;
 }
 
+.lose {
+    background-color: red;
+}
+
+.win {
+    background-color: green;
+}
+
 .line {
 display: flex;
+align-items: center;
 }
+

@@ -7,9 +7,35 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>CovidSweeper</h1>
-    <div id="board">
-    </div>
+    <div class="game_container"> 
+        <div class="top_bar">
+            <div class="mines_counter">
+                <div id="mines_hundreds"> 
+                    <img src="/imgs/d0.svg">
+                </div>
+                <div id="mines_tens">
+                  <img src="/imgs/d1.svg">
+                </div>
+                <div id="mines_ones">
+                    <img src="/imgs/d0.svg">
+                </div>
+            </div>
+            <div id="face" >
+                <img src="/imgs/face_unpressed.svg">
+            </div>
+            <div class="time_counter">
+                <div id="seconds_hundreds">
+                    <img src="/imgs/d0.svg">
+                </div>
+                <div id="seconds_tens">
+                    <img src="/imgs/d0.svg">
+                </div>
+                <div id="seconds_ones">
+                    <img src="/imgs/d0.svg">
+                </div>
+            </div>
+        </div>
+        <div id="board"> </div>
     </div>
     <script src="./src/constant.js"></script>
     <script src="./src/main.js"></script>
