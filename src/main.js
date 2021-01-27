@@ -146,22 +146,51 @@ return counterFalse
 
 
 
-
 // Counter
+function startTimer() {
+    let seconds = 0
+    let seconds_hundreds=0
+    let seconds_tens=0
+    let seconds_ones=0
+    interval = setInterval(function () {
+        seconds+=1
+        seconds_hundreds=Math.floor(seconds/100)
+        seconds_tens=Math.floor((seconds-seconds_hundreds*100)/10)
+        seconds_ones=seconds-seconds_tens*10-seconds_hundreds*100
+        console.log(seconds)
+        console.log(seconds_hundreds)
+        console.log(seconds_tens)
+        console.log(seconds_ones)
+        document.querySelector('#seconds_hundreds').innerHTML=`<img src="/imgs/d${seconds_hundreds}.svg"></img>`
+        document.querySelector('#seconds_tens').innerHTML=`<img src="/imgs/d${seconds_tens}.svg"></img>`
+        document.querySelector('#seconds_ones').innerHTML=`<img src="/imgs/d${seconds_ones}.svg"></img>`
+    }, 1000);
+    if (seconds >999) clearInterval(interval);
+}
 
-// function displayTime() {
-//     const date = new Date();
-//     const time = date.toLocaleTimeString();
-//     document.querySelector('#time_counter').innerText = time;
-//   }
-//   displayTime();
-//   const createClock = setInterval(displayTime, 1000);
 
+//Start New Game
+function startNewGame() {
+    virus = 10
+    counterFalse = 0
+    bombs = []
+    vaccines =[]
+    vaccine = 0
+    startTimer()
+    virus_tens=Math.floor(virus/10)
+    virus_ones = virus-virus_tens*10
+    document.querySelector('#mines_ones').innerHTML=`<img src="/imgs/d${virus_ones}.svg"></img>`
+    document.querySelector('#mines_tens').innerHTML=`<img src="/imgs/d${virus_tens}.svg"></img>`
+    smiley = document.querySelector('#face')
+    smiley.innerHTML = `<img src="/imgs/face_unpressed.svg"></img>`
+    theBoard = []
+    theBoard = shuffleBoard()
+    loadBoard (theBoard)
+    console.log(theBoard)   
+    console.log(vaccines) 
+const allElements = document.querySelectorAll(".boardElement")
 
-//Event Listeners
-window.addEventListener('load', function (event) {
-    const allElements = document.querySelectorAll(".boardElement")
-    for (let i=0; i< allElements.length; i++) {
+for (let i=0; i< allElements.length; i++) {
     allElements[i].addEventListener('click',function (event) {
         const filter = vaccines.filter(vaccine => JSON.stringify(vaccine) === JSON.stringify(allElements[i].id))
         if(filter.length%2 == 0) {
@@ -169,12 +198,19 @@ window.addEventListener('load', function (event) {
         }
     });
     allElements[i].addEventListener('contextmenu',function (event) {
-        if (virus !==0 || vaccines.indexOf(allElements[i].id)!==-1) {
-        allElements[i].querySelectorAll('img')[1].classList.toggle('img');
-        vaccines.push(allElements[i].id)
-            console.log(JSON.stringify(allElements[i].id))
+       rightClick(allElements[i])
+    });      
+}
+}
+
+//Right Click Function
+function rightClick(boardElement) {
+    if (virus !==0 || vaccines.indexOf(boardElement.id)!==-1) {
+        boardElement.querySelectorAll('img')[1].classList.toggle('img');
+        vaccines.push(boardElement.id)
+            console.log(JSON.stringify(boardElement.id))
             console.log(vaccines)
-            const filter = vaccines.filter(vaccine => JSON.stringify(vaccine) === JSON.stringify(allElements[i].id))
+            const filter = vaccines.filter(vaccine => JSON.stringify(vaccine) === JSON.stringify(boardElement.id))
             if (filter.length%2 == 0)  virus +=1
             else virus+=-1 
         virus_tens=Math.floor(virus/10)
@@ -183,27 +219,50 @@ window.addEventListener('load', function (event) {
             document.querySelector('#mines_ones').innerHTML=`<img src="/imgs/d${virus_ones}.svg"></img>`
             document.querySelector('#mines_tens').innerHTML=`<img src="/imgs/d${virus_tens}.svg"></img>`
         }
-    }
-    });
-    }   
+        }
+}
+
+//Event Listeners
+window.addEventListener('load', function (event) {
+    const allElements = document.querySelectorAll(".boardElement")
+    for (let i=0; i< allElements.length; i++) {
+        allElements[i].addEventListener('click',function (event) {
+            const filter = vaccines.filter(vaccine => JSON.stringify(vaccine) === JSON.stringify(allElements[i].id))
+            if(filter.length%2 == 0) {
+            revealValue(allElements[i])
+            }
+        });
+        allElements[i].addEventListener('contextmenu',function (event) {
+           rightClick(allElements[i])
+        });
+    } 
+       
     const smiley = document.querySelector('#face')
     // console.log(smiley)
     smiley.addEventListener('click',function (event) {
-    revealEverything();
-    console.log (counterFalse)
-    if (counterFalse > 0) smiley.innerHTML = `<img src="/imgs/face_lose.svg"></img>`
-    else smiley.innerHTML = `<img src="/imgs/face_win.png"></img>`
-});
+        revealEverything();
+        console.log (counterFalse)
+        if (counterFalse > 0) smiley.innerHTML = `<img src="/imgs/face_lose.svg"></img>`
+        else smiley.innerHTML = `<img src="/imgs/face_win.png"></img>`
+    });
+
+    const startButton =document.querySelector('.button')
+    startButton.addEventListener('click',function (event) {
+        startNewGame()
+        clearInterval(interval);
+        startTimer();
+    }); 
 
 });
 
 let counterFalse = 0
 let bombs = []
 let vaccines =[]
-let vaccine=0
-let virus =10
+let vaccine = 0
+let virus = 10
 let virus_tens
 let virus_ones
-const theBoard = shuffleBoard()
-console.log(theBoard)
+let theBoard = []
+
+theBoard = shuffleBoard()
 loadBoard (theBoard)
