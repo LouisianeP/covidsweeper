@@ -114,7 +114,7 @@ function revealEverything() {
  const allElements = document.querySelectorAll(".boardElement")
  let correctVacccines = []
  let stringBombs = []
- console.log(vaccines);
+// console.log(vaccines);
  for (boardElement of allElements) {
     boardElement.querySelector('img').classList.remove('img')
  }
@@ -161,18 +161,18 @@ function startTimer() {
 
 //Start New Game
 function startNewGame() {
-    virus = 10
-    counterFalse = 0
-    bombs = []
-    vaccines =[]
-    vaccine = 0
+    // virus = 10
+    // counterFalse = 0
+    // bombs = []
+    // vaccines =[]
+    // vaccine = 0
     startTimer ()
-    virus_tens=Math.floor(virus/10)
-    virus_ones = virus-virus_tens*10
-    document.querySelector('#mines_ones').innerHTML=`<img src="./imgs/d${virus_ones}.svg"></img>`
-    document.querySelector('#mines_tens').innerHTML=`<img src="./imgs/d${virus_tens}.svg"></img>`
-    smiley = document.querySelector('#face')
-    smiley.innerHTML = `<img src="./imgs/face_unpressed.svg"></img>`
+    // virus_tens=Math.floor(virus/10)
+    // virus_ones = virus-virus_tens*10
+    // document.querySelector('#mines_ones').innerHTML=`<img src="./imgs/d${virus_ones}.svg"></img>`
+    // document.querySelector('#mines_tens').innerHTML=`<img src="./imgs/d${virus_tens}.svg"></img>`
+    // smiley = document.querySelector('#face')
+    // smiley.innerHTML = `<img src="./imgs/face_unpressed.svg"></img>`
 
 // const allElements = document.querySelectorAll(".boardElement")
 
