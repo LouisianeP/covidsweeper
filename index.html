@@ -5,11 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CovidSweeper</title>
     <link rel="stylesheet" href="style.css">
+    <audio src="./sounds/win95.mp3" autoplay="autoplay"></audio>
 </head>
 <body>
-    <div class="game_container"> 
-        <button class="button" id="button_newgame" type="button">Start New Game</button>
-        <button class="button" id="button_timer" type="button">Start Timer</button>
+    <div class="game_container window"> 
+        <div class="window">
+            <div class="title-bar">
+              <div class="title-bar-text">Covid Sweeper</div>
+              <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button aria-label="Close"></button>
+              </div>
+            </div>
+          </div>
+        <div id="buttons">
+            <button class="button" id="button_newgame" type="button">Start New Game</button>
+            <button class="button" id="button_timer" type="button">Start Timer</button>
+        </div>
         <div class="top_bar">
             <div class="mines_counter">
                 <div id="mines_hundreds"> 
@@ -37,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <div id="board"> </div>
+        <div id="board" > </div>
     </div>
     <script src="./src/constant.js"></script>
     <script src="./src/main.js"></script>

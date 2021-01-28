@@ -69,8 +69,6 @@ function shuffleBoard () {
     return board;
 }
 
-
-
 function revealValue(boardElement) {
 
    let coordinates = boardElement.id.split('-')
@@ -80,8 +78,8 @@ function revealValue(boardElement) {
 // case where the value = 0
 
     if (theBoard[x][y]==0) {
-        const boardElements = []
         boardElements.push([`${[x]}-${[y]}`])
+        zeroList.push([`${[x]}-${[y]}`])
         if (x>0 && y>0) boardElements.push([`${[x-1]}-${[y-1]}`])
         if (x>0) boardElements.push([`${[x-1]}-${[y]}`])
         if (x>0 && y<8) boardElements.push([`${[x-1]}-${[y+1]}`])
@@ -90,14 +88,12 @@ function revealValue(boardElement) {
         if (x<8 && y>0) boardElements.push([`${[x+1]}-${[y-1]}`])
         if (x<8) boardElements.push([`${[x+1]}-${[y]}`])
         if (x<8 && y<8) boardElements.push([`${[x+1]}-${[y+1]}`])
-    
-    for (unrevealElement of boardElements) {
+        
+        for (unrevealElement of boardElements) {
         newElement=document.getElementById(`${unrevealElement}`)
         newElement.querySelector('img').classList.remove('img')
-        
-        // console.log(newElement)
-        }   
     }
+}
 
 // case where the value = 1,2,3 ...
     if (theBoard[x][y]!==0 && theBoard[x][y]!=='X')  boardElement.querySelector('img').classList.remove('img')
@@ -145,8 +141,6 @@ for (stringBomb of stringBombs) {
 return counterFalse 
 }
 
-
-
 // Counter
 function startTimer() {
     let seconds = 0
@@ -158,17 +152,12 @@ function startTimer() {
         seconds_hundreds=Math.floor(seconds/100)
         seconds_tens=Math.floor((seconds-seconds_hundreds*100)/10)
         seconds_ones=seconds-seconds_tens*10-seconds_hundreds*100
-        console.log(seconds)
-        console.log(seconds_hundreds)
-        console.log(seconds_tens)
-        console.log(seconds_ones)
         document.querySelector('#seconds_hundreds').innerHTML=`<img src="./imgs/d${seconds_hundreds}.svg"></img>`
         document.querySelector('#seconds_tens').innerHTML=`<img src="./imgs/d${seconds_tens}.svg"></img>`
         document.querySelector('#seconds_ones').innerHTML=`<img src="./imgs/d${seconds_ones}.svg"></img>`
     }, 1000);
     if (seconds >999) clearInterval(interval);
 }
-
 
 //Start New Game
 function startNewGame() {
@@ -177,31 +166,27 @@ function startNewGame() {
     bombs = []
     vaccines =[]
     vaccine = 0
-    startTimer()
+    startTimer ()
     virus_tens=Math.floor(virus/10)
     virus_ones = virus-virus_tens*10
     document.querySelector('#mines_ones').innerHTML=`<img src="./imgs/d${virus_ones}.svg"></img>`
     document.querySelector('#mines_tens').innerHTML=`<img src="./imgs/d${virus_tens}.svg"></img>`
     smiley = document.querySelector('#face')
     smiley.innerHTML = `<img src="./imgs/face_unpressed.svg"></img>`
-    theBoard = []
-    theBoard = shuffleBoard()
-    loadBoard (theBoard)
-    console.log(theBoard)   
-    console.log(vaccines) 
-const allElements = document.querySelectorAll(".boardElement")
 
-for (let i=0; i< allElements.length; i++) {
-    allElements[i].addEventListener('click',function (event) {
-        const filter = vaccines.filter(vaccine => JSON.stringify(vaccine) === JSON.stringify(allElements[i].id))
-        if(filter.length%2 == 0) {
-        revealValue(allElements[i])
-        }
-    });
-    allElements[i].addEventListener('contextmenu',function (event) {
-       rightClick(allElements[i])
-    });      
-}
+// const allElements = document.querySelectorAll(".boardElement")
+
+// for (let i=0; i< allElements.length; i++) {
+//     allElements[i].addEventListener('click',function (event) {
+//         const filter = vaccines.filter(vaccine => JSON.stringify(vaccine) === JSON.stringify(allElements[i].id))
+//         if(filter.length%2 == 0) {
+//         revealValue(allElements[i])
+//         }
+//     });
+//     allElements[i].addEventListener('contextmenu',function (event) {
+//        rightClick(allElements[i])
+//     });      
+
 }
 
 //Right Click Function
@@ -239,12 +224,19 @@ window.addEventListener('load', function (event) {
     } 
        
     const smiley = document.querySelector('#face')
-    // console.log(smiley)
     smiley.addEventListener('click',function (event) {
         revealEverything();
         console.log (counterFalse)
-        if (counterFalse > 0) smiley.innerHTML = `<img src="./imgs/face_lose.svg"></img>`
-        else smiley.innerHTML = `<img src="./imgs/face_win.png"></img>`
+        if (counterFalse > 0) {
+            smiley.innerHTML = `<img src="./imgs/face_lose.svg"></img>`
+            let snd = new Audio("./sounds/lose.mp3"); 
+            snd.play();
+        }
+        else {
+            smiley.innerHTML = `<img src="./imgs/face_win.png"></img>`
+            let snd = new Audio("./sounds/win31.mp3"); 
+            snd.play();
+        }
     });
 
     const startButton =document.querySelector('#button_newgame')
@@ -255,12 +247,13 @@ window.addEventListener('load', function (event) {
 
     const startTimer =document.querySelector('#button_timer')
     startTimer.addEventListener('click',function (event) {
-    startNewGame()
-      //  clearInterval(interval);
+        startNewGame()
     }); 
    
 });
 
+let zeroList = []
+let zeroTemp = []
 let counterFalse = 0
 let bombs = []
 let vaccines =[]
@@ -269,6 +262,8 @@ let virus = 10
 let virus_tens
 let virus_ones
 let theBoard = []
+const boardElements = []
 
-theBoard = shuffleBoard()
-loadBoard (theBoard)
+ theBoard = shuffleBoard()
+ loadBoard (theBoard)
+ console.log(theBoard)
