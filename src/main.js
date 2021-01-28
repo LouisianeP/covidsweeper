@@ -103,6 +103,8 @@ function revealValue(boardElement) {
     boardElement.querySelector('img').classList.remove('img')
     boardElement.querySelector('img').classList.add('lose')
     
+    let snd = new Audio("./sounds/lose.mp3"); 
+    snd.play();
     const smiley = document.querySelector('#face')
     smiley.innerHTML = '<img src="./imgs/face_lose.svg">'
     alert('You lose')
@@ -161,18 +163,18 @@ function startTimer() {
 
 //Start New Game
 function startNewGame() {
-    // virus = 10
+    virus = 10
     // counterFalse = 0
     // bombs = []
     // vaccines =[]
     // vaccine = 0
     startTimer ()
-    // virus_tens=Math.floor(virus/10)
-    // virus_ones = virus-virus_tens*10
-    // document.querySelector('#mines_ones').innerHTML=`<img src="./imgs/d${virus_ones}.svg"></img>`
-    // document.querySelector('#mines_tens').innerHTML=`<img src="./imgs/d${virus_tens}.svg"></img>`
-    // smiley = document.querySelector('#face')
-    // smiley.innerHTML = `<img src="./imgs/face_unpressed.svg"></img>`
+    virus_tens=Math.floor(virus/10)
+    virus_ones = virus-virus_tens*10
+    document.querySelector('#mines_ones').innerHTML=`<img src="./imgs/d${virus_ones}.svg"></img>`
+    document.querySelector('#mines_tens').innerHTML=`<img src="./imgs/d${virus_tens}.svg"></img>`
+    smiley = document.querySelector('#face')
+    smiley.innerHTML = `<img src="./imgs/face_unpressed.svg"></img>`
 
 // const allElements = document.querySelectorAll(".boardElement")
 
