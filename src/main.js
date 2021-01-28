@@ -6,8 +6,8 @@ function loadBoard(shuffleBoard) {
     let j = 0;
         for (boardElement of boardLine) {
     html += `<div class="boardElement" id="${i}-${j}" oncontextmenu="return false;">`;
-    html += `<img class="img" src='../imgs/${boardElement}.png' width="20" height="20">`;
-    html += `<img class="img" src='../imgs/vaccine.png' width="20" height="20">`;
+    html += `<img class="img" src='./imgs/${boardElement}.png' width="20" height="20">`;
+    html += `<img class="img" src='./imgs/vaccine.png' width="20" height="20">`;
     html += `</div>`;
     j+=1
       }
@@ -108,7 +108,7 @@ function revealValue(boardElement) {
     boardElement.querySelector('img').classList.add('lose')
     
     const smiley = document.querySelector('#face')
-    smiley.innerHTML = '<img src="../imgs/face_lose.svg">'
+    smiley.innerHTML = '<img src="./imgs/face_lose.svg">'
     alert('You lose')
     }
     
@@ -162,9 +162,9 @@ function startTimer() {
         console.log(seconds_hundreds)
         console.log(seconds_tens)
         console.log(seconds_ones)
-        document.querySelector('#seconds_hundreds').innerHTML=`<img src="../imgs/d${seconds_hundreds}.svg"></img>`
-        document.querySelector('#seconds_tens').innerHTML=`<img src="../imgs/d${seconds_tens}.svg"></img>`
-        document.querySelector('#seconds_ones').innerHTML=`<img src="../imgs/d${seconds_ones}.svg"></img>`
+        document.querySelector('#seconds_hundreds').innerHTML=`<img src="./imgs/d${seconds_hundreds}.svg"></img>`
+        document.querySelector('#seconds_tens').innerHTML=`<img src="./imgs/d${seconds_tens}.svg"></img>`
+        document.querySelector('#seconds_ones').innerHTML=`<img src="./imgs/d${seconds_ones}.svg"></img>`
     }, 1000);
     if (seconds >999) clearInterval(interval);
 }
@@ -180,10 +180,10 @@ function startNewGame() {
     startTimer()
     virus_tens=Math.floor(virus/10)
     virus_ones = virus-virus_tens*10
-    document.querySelector('#mines_ones').innerHTML=`<img src="../imgs/d${virus_ones}.svg"></img>`
-    document.querySelector('#mines_tens').innerHTML=`<img src="../imgs/d${virus_tens}.svg"></img>`
+    document.querySelector('#mines_ones').innerHTML=`<img src="./imgs/d${virus_ones}.svg"></img>`
+    document.querySelector('#mines_tens').innerHTML=`<img src="./imgs/d${virus_tens}.svg"></img>`
     smiley = document.querySelector('#face')
-    smiley.innerHTML = `<img src="../imgs/face_unpressed.svg"></img>`
+    smiley.innerHTML = `<img src="./imgs/face_unpressed.svg"></img>`
     theBoard = []
     theBoard = shuffleBoard()
     loadBoard (theBoard)
@@ -217,8 +217,8 @@ function rightClick(boardElement) {
         virus_tens=Math.floor(virus/10)
         virus_ones = virus-virus_tens*10
         if (virus!==-1) {
-            document.querySelector('#mines_ones').innerHTML=`<img src="../imgs/d${virus_ones}.svg"></img>`
-            document.querySelector('#mines_tens').innerHTML=`<img src="../imgs/d${virus_tens}.svg"></img>`
+            document.querySelector('#mines_ones').innerHTML=`<img src="./imgs/d${virus_ones}.svg"></img>`
+            document.querySelector('#mines_tens').innerHTML=`<img src="./imgs/d${virus_tens}.svg"></img>`
         }
         }
 }
@@ -243,8 +243,8 @@ window.addEventListener('load', function (event) {
     smiley.addEventListener('click',function (event) {
         revealEverything();
         console.log (counterFalse)
-        if (counterFalse > 0) smiley.innerHTML = `<img src="../imgs/face_lose.svg"></img>`
-        else smiley.innerHTML = `<img src="../imgs/face_win.png"></img>`
+        if (counterFalse > 0) smiley.innerHTML = `<img src="./imgs/face_lose.svg"></img>`
+        else smiley.innerHTML = `<img src="./imgs/face_win.png"></img>`
     });
 
     const startButton =document.querySelector('#button_newgame')
