@@ -196,7 +196,7 @@ function rightClick(boardElement) {
     if (virus !==0 || vaccines.indexOf(boardElement.id)!==-1) {
         boardElement.querySelectorAll('img')[1].classList.toggle('img');
         vaccines.push(boardElement.id)
-            console.log(JSON.stringify(boardElement.id))
+ //           console.log(JSON.stringify(boardElement.id))
             console.log(vaccines)
             const filter = vaccines.filter(vaccine => JSON.stringify(vaccine) === JSON.stringify(boardElement.id))
             if (filter.length%2 == 0)  virus +=1
@@ -228,7 +228,7 @@ window.addEventListener('load', function (event) {
     const smiley = document.querySelector('#face')
     smiley.addEventListener('click',function (event) {
         revealEverything();
-        console.log (counterFalse)
+ //       console.log (counterFalse)
         if (counterFalse > 0) {
             smiley.innerHTML = `<img src="./imgs/face_lose.svg"></img>`
             let snd = new Audio("./sounds/lose.mp3"); 
